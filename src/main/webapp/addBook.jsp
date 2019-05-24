@@ -45,7 +45,7 @@
 </script>
 </head>
 <body background='images/03.jpg'>
-	<form action="BookServlet?action=addBook" method="post">
+	<form action="addBook" method="post">
 		<table align="center" width="500px" height="550px"
 			cellspacing="0">
 			<br>
