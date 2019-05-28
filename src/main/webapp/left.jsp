@@ -49,8 +49,8 @@
 	<h4>图书管理</h4>
 	<div>
 	  <ul>
-	    <li><a href="addBook.jsp" target="right"><span class="ui-icon ui-icon-plusthick"></span>添加图书</a></li>
-	    <li><a href="BookServlet?action=showBookByPage" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看图书</a></li>	   
+	    <li><a href="addUI" target="right"><span class="ui-icon ui-icon-plusthick"></span>添加图书</a></li>
+	    <li><a href="showByPage" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看图书</a></li>	   
 	  </ul>
 	</div>
 	    

@@ -186,10 +186,7 @@
 				<li><a
 					href="${pb.url }&pageNow=${pb.pageNow-1 }">上一页</a></li>
 			</c:if>
-<!-- 分两种情况：
-		      如果页数小于10：
-		         如果页数大于10：         
-		        -->
+             <!-- 分两种情况：如果页数小于10：如果页数大于10： -->
 			<c:choose>
 				<c:when test="${pb.pages<=10 }">
 					<c:set var="begin" value="1"></c:set>

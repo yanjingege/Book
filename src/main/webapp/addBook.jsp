@@ -17,34 +17,171 @@
 <title>添加图书</title>
 <script type="text/javascript" src="js/ajax.js"></script>
 <script type="text/javascript">
-	window.onload = function() {//页面加载完成
-		ajax({
-			method : "POST",
-			url : "FenleiServlet",
-			params : "action=updateShowFenlei",
-			type : "xml",
-			success : function(data) {
-				var select = document.getElementById("fenleiList");
-				var fnames = data.getElementsByTagName("fname");
-				for (var i = 0; i < fnames.length; i++) {
-					var fname = fnames[i];
-					var opt = document.createElement("option");
-					var value;
-					if (window.addEventListener) {
-						value = fname.textContent;
-					} else {
-						value = text;
+	$(function() {
+		$("#login").bootstrapValidator({
+
+			feedbackIcons : {
+				valid : "glyphicon glyphicon-ok",
+				invalid : "glyphicon glyphicon-remove",
+				validating : "glyphicon glyphicon-refresh"
+			},
+			fields : {
+				name : {
+					validators : {
+						notEmpty : {
+							message : '书名不能为空'
+						},
+						regexp : {
+							regexp : /^[\u0391-\uFFE5]{1,20}$/,
+							message : '书名必须是1~20个汉字'
+						},
 					}
-					opt.innerHTML = value;
-					opt.value = value;
-					select.appendChild(opt);
+				},
+				price : {
+					validators : {
+						notEmpty : {
+							message : '书的价格不能为空'
+						},
+						regexp : {
+							regexp : /^[0-9]+$/,
+							message : '书的价格必须是数字'
+						},
+
+					}
+				},
+
+				chuban : {
+					validators : {
+						notEmpty : {
+							message : '出版社不能为空'
+						},
+						regexp : {
+							regexp : /^[\u0391-\uFFE5]{5,10}$/,
+							message : '出版社必须是5~10位汉字'
+						},
+					}
+				},
+				zhuangtai : {
+					validators : {
+						notEmpty : {
+							message : '必须选择书籍的状态'
+						},
+					}
+				},
+
+				jieshuren : {
+					validators : {
+						notEmpty : {
+							message : '借书人不能为空'
+						},
+						regexp : {
+							regexp : /^[\u0391-\uFFE5]{2,10}$/,
+							message : '借书人的名字必须是2~10位汉字'
+						},
+					}
+				},
+
+				fname : {
+					validators : {
+						notEmpty : {
+							message : '图书分类不能为空'
+						},
+						regexp : {
+							regexp : /^[\u0391-\uFFE5]{2,10}$/,
+							message : '分类的名字必须是2~10位汉字'
+						},
+					}
+
 				}
 			}
+
 		});
-	};
+	});
 </script>
 </head>
 <body background='images/03.jpg'>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<form id="login" action="add" method="post">
+					<h3 class="text-center text-success">添加图书</h3>
+
+					<div class="form-group">
+						<label>图&nbsp;书&nbsp;名&nbsp;称:</label> <input type="text"
+							name="name" class="form-control" />
+					</div>
+
+					<div class="form-group">
+						<label>图&nbsp;书&nbsp;价&nbsp;格:</label> <input type="text"
+							name="price" class="form-control" />
+					</div>
+					
+					<div class="form-group">
+						<label>出&nbsp;&nbsp;&nbsp;版&nbsp;&nbsp;&nbsp;社:</label> <input
+							type="text" name="chuban" class="form-control" />
+					</div>
+
+
+					<div class="form-group">
+						<label>状&nbsp;&nbsp;态：</label>
+						<div class="radio">
+							<label class="radio-inline"><input type="radio"
+								name="zhuangtai" value="未借出" />未借出</label> <label class="radio-inline"><input
+								type="radio" name="zhuangtai" value="借出" />借出</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>借&nbsp;&nbsp;&nbsp;书&nbsp;&nbsp;&nbsp;人:</label> <input
+							type="text" name="jieshuren" class="form-control" />
+					</div>
+
+					<div class="form-group">
+
+						<label for="Fenlei" class="col-sm-4 control-label">分&nbsp;&nbsp;类&nbsp;&nbsp;名&nbsp;&nbsp;称</label>
+
+						<input name="Fenlei" id="Fenlei" class="form-control" />
+
+
+					</div>
+
+					<div>
+						<label>分类Id</label> <select name="Fenlei" class="form-control">
+
+							<c:forEach items="${flist}" var="f">
+
+								<option value="${f.fid}">${f.fname}</option>
+
+							</c:forEach>
+						</select>
+					</div>
+					<br> <br>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<center>
+								<button type="submit" class="btn btn-info">添加图书</button>
+							</center>
+						</div>
+					</div>
+
+					<br> <br>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<center>
+								<button type="reset" class="btn btn-info">重置</button>
+							</center>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- 
 	<form action="addBook" method="post">
 		<table align="center" width="500px" height="550px"
 			cellspacing="0">
@@ -90,6 +227,6 @@
 			
 			</table>
 		</table>
-	</form>
+	</form>    -->
 </body>
 </html>
