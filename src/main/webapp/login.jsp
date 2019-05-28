@@ -13,6 +13,9 @@
 </c:if>
 
 <title>登录</title>
+<script type="text/javascript">
+
+</script>
 <style >
     body{
     margin:0
@@ -24,7 +27,7 @@
     <tr height="10px">
 	<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="7" color="#cc6600" face="幼圆"><b>Oracle</b></font><font size="6" color="#606060">图书管理系统</font><font size="4" color="#b2b2b2">|</font><font size="4" color="#606060"  >登录</font></td></tr>	
     <td width="100%"align="center" >
-        <form  action="AdminServlet?action=login" method="post">
+        <form class="form-horizontal" action="login" method="post" >
 	    <table action="center" width="400px" height="400px" bgcolor="white">
 		<tr><td colspan="3">&nbsp;&nbsp;<font color="#4169E1" size="6" face="幼圆"><b>会员登录</b></font></td></tr>
 		<tr><td align="center"><font size="4" color="#DB7093"><b>登&nbsp;录&nbsp;账&nbsp;号:<b></font></td><td><input type="text"  name="username"/></td></tr>

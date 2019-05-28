@@ -241,7 +241,7 @@
 
 	 }
 	 }
-
+*/
 
 	 //5.确认密码
 	 function validateRePassword() {
@@ -273,12 +273,11 @@
 
 	 }
 
-
 	 function jiaoyan() {
 
 	 return validateName() && validatePhone() && validateUsername() && validatePassword() && validateRePassword();
 
-	 }*/
+	 }
 </script>
 </head>
 <body background='images/04.jpg'>
@@ -292,8 +291,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
-				<form id="register" action="AdminServlet?action=register"enctype="multipart/form-data"
-					method="post">
+				<form action="register" class="form-horizontal" method="post">
 					<div class="form-group">
 						<label>姓名:</label> <input type="text" name="name"
 							class="form-control"/>

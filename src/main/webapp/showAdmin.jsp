@@ -17,53 +17,7 @@
 <title>查看管理员信息</title>
 <script type="text/javascript" src="js/ajax.js"></script>
 <script type="text/javascript">
-window.onload = function() {
 
-	var opt = {
-
-		method : "POST",
-		url : "AdminServlet",
-		params : "action=showAdmin",
-		type : "json",
-		success : function(data) {
-
-			var admin = data;//
-
-			var id = document.getElementById("id");
-
-			id.innerHTML = admin.id;
-
-			var name = document.getElementById("name");
-
-			name.innerHTML = admin.name;
-			
-			var touxiang=document.getElementById("touxiang");
-			
-			var img=document.createElement("img");
-			
-			img.src="/img"+admin.touxiang;
-			
-			img.style="width:60px;height:50px";
-			
-            touxiang.appendChild(img);
-            
-			var phone = document.getElementById("phone");
-
-			phone.innerHTML = admin.phone;
-
-			var username = document.getElementById("username");
-
-			username.innerHTML = admin.username;
-
-			var password = document.getElementById("password");
-
-			password.value=admin.password;
-		}
-	};
-
-	ajax(opt);
-
-};
 </script>
 
 </head>
@@ -75,6 +29,7 @@ window.onload = function() {
 			cellspacing="0">
 		<br>	
 		<td colspan=2 valign="top">
+		<form class="form-horizontal" action="show" method="get" >
 				<table class="table table-striped table-hover table-bordered"   width="500px" height="280px"
 					align="center" cellspacing="0">							
 		<tr>
@@ -101,7 +56,18 @@ window.onload = function() {
 				<td align="center"><font size="4">密&nbsp;&nbsp;&nbsp;码:</font></td>
 				<td><input type="password" id="password" disabled="disabled" /></td>
 			</tr>
+			<c:catch item=${m.beanlist } val="m">
+			<tr>
+			<td>${m.id }</td>
+			<td>${m.name }</td>
+			<td>${m.touxiang }</td>
+			<td>${m.phone }</td>
+			<td>${m.username }</td>
+			<td>${m.password }</td>
+			</tr>
+			</c:catch>
 			</table>
+			</form>
 	</table>
 </body>
 </html>

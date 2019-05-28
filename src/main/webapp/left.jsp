@@ -67,7 +67,7 @@
 	  <ul>
 	    <li><a href="showAdmin.jsp" target="right"><span class="ui-icon ui-icon-plusthick"></span>查看管理员信息</a></li>
 	    <li><a href="updatePassword.jsp" target="right"><span class="ui-icon ui-icon-folder-open"></span>修改密码</a></li>
-	    <li><a href="AdminServlet?action=exit" target="_parent"><span class="ui-icon ui-icon-folder-star"></span>退出系统</a></li>	   	   
+	    <li><a href="exit.jsp" target="_parent"><span class="ui-icon ui-icon-folder-star"></span>退出系统</a></li>	   	   
 	  </ul>
 	</div>	 
 
