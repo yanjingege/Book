@@ -22,18 +22,19 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	@Transactional
+	public List<Book> list() {
+		// TODO Auto-generated method stub
+		return this.bookMapper.selectAll();
+	}
+
+	@Override
+	@Transactional
 	public int save(Book book) {
 		// TODO Auto-generated method stub
 		return this.bookMapper.insert(book);
 	}
 
-	@Override
-	@Transactional
-	public List<SubBook> list() {
-		// TODO Auto-generated method stub
-		return this.bookMapper.selectAllWithOneSQL();
-	}
-
+	
 	@Override
 	@Transactional
 	public void delete(Book book) {
@@ -57,34 +58,27 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	@Transactional
-	public PageBean<SubBook> showByPage(Integer pageNow) {
+	public PageBean<SubBook> showAllByPage(Integer pageNow) {
 		// TODO Auto-generated method stub
 		
-        PageBean<SubBook> pb = new PageBean<SubBook>();
+		PageBean<SubBook> pb = new PageBean<SubBook>();
 
-		
-		PageHelper.startPage(pageNow, 2);
-		
-		List<SubBook> list = this.bookMapper.showByPageHelper();
-		
+		PageHelper.startPage(pageNow, 5);
+
+		List<SubBook> list = this.bookMapper.showAllByPage();
+
 		pb.setBeanList(list);
-		
-		//总记录数
-		System.out.println("ok2");
-		
-		PageInfo<SubBook> pi=new PageInfo<SubBook>(list);
-		
-		//pb
+
+		PageInfo<SubBook> pi = new PageInfo<SubBook>(list);
+
 		pb.setCounts((int) pi.getTotal());
-		
-		//当前页
+
 		pb.setPageNow(pi.getPageNum());
-		
-		//每页显示的条数 自定义
+
 		pb.setPageSize(pi.getPageSize());
-		
+
 		return pb;
-		
 	}
+	
 
 }

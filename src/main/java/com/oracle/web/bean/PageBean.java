@@ -64,6 +64,4 @@ public class PageBean<T> implements Serializable{
 				+ beanList + "]";
 	}
 	
-	
-
 }

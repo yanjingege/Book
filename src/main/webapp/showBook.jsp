@@ -15,6 +15,7 @@
 <!-- 5.引入BootStrap的核心JS文件 -->
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="jQuery/jquery-1.8.3.js"></script> 
 <title>查看图书</title>
 <style type="text/css">
 #h1{
@@ -23,7 +24,7 @@
 
 </style>
 <script>
-	window.onload = function() {
+   <!-- window.onload = function() {
 		var selectAll = document.getElementById("selectAll");
 		selectAll.onclick = function() {
 			var chek = document.getElementsByName("ids");
@@ -77,7 +78,7 @@
 				location.reload();
 			}
 		}
-	};
+	};  -->
 </script>
 </head>
 <body background='images/03.jpg'>
@@ -91,7 +92,7 @@
 		<br>
 		<ul class="dropdown-menu dropdown-menu-left" role="menu">
 			<li>
-				<form action="BookServlet" class="form-horizontal">
+				<form action="BookServlet" class="form-horizontal"> 
 					<!-- 隐藏域，用来传递action -->
 					<input type="hidden" name="action" value="showBookByWhere">
 					<div class="control-group   ">

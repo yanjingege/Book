@@ -22,23 +22,19 @@ import com.oracle.web.service.FenleiService;
 @Controller
 @Scope(value = "prototype")
 public class BookHandler {
-
-	private static final String NONE = null;
 	
 	@Autowired
 	private BookService bookService;
 
 	@Autowired
 	private FenleiService fenleiService;
-	
+
 //	@RequestMapping(value = "/books", method = RequestMethod.GET)
-//	public String selectBooks(HttpServletRequest request) {// 全查
+//	public String Books(HttpServletRequest request) {
 //
-//		List<SubBook> mlist = this.bookService.list();
+//		List<Book> bList = bookService.list();
 //
-//		///System.out.println(mlist);
-//
-//		request.setAttribute("mlist", mlist);
+//		request.setAttribute("bList", bList);
 //
 //		return "showBook";
 //	}
@@ -47,24 +43,24 @@ public class BookHandler {
 	@RequestMapping(value = "/addUI", method = RequestMethod.GET)
 	public String addUI(HttpServletRequest request) {
 
-		List<Fenlei> flist = FenleiService.list();
+		List<Fenlei> flist = fenleiService.list();
 
 		request.setAttribute("flist", flist);
 
 		return "addBook";
 	}
 
-	@RequestMapping(value = "/addBook", method = RequestMethod.POST)
+	@RequestMapping(value = "/book", method = RequestMethod.POST)
 	public String add(Book book) {
 
 		bookService.save(book);
 
-		return "redirect:/showByPage";
+		return "redirect:/books";
 	}
 	
 
-	@RequestMapping(value="/deleteBook/{id}",method=RequestMethod.DELETE)
-	public String deleteBook(@PathVariable(value="id") Integer id){
+	@RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
+	public String delete(@PathVariable(value="id") Integer id){
 	
 		Book book=new Book();
 		
@@ -72,7 +68,7 @@ public class BookHandler {
 		
 		bookService.delete(book);
 
-		return  "redirect:/showByPage";
+		return  "redirect:/books";
 		
 	}
 	
@@ -81,9 +77,9 @@ public class BookHandler {
 		
 		Book book=this.bookService.queryOne(id);
 		
-		session.setAttribute("b", book);
+		session.setAttribute("book", book);
 		
-		List<Fenlei> flist=FenleiService.list();
+		List<Fenlei> flist=fenleiService.list();
 		
 		session.setAttribute("flist", flist);
 		
@@ -91,16 +87,16 @@ public class BookHandler {
 		
 	}
 	
-	@RequestMapping(value="/updatebook",method=RequestMethod.PUT)
+	@RequestMapping(value="/book",method=RequestMethod.PUT)
 	public String update(Book book){
 		
 	    bookService.update(book);
 	
-		return "redirect:/showByPage";
+		return "redirect:/books";
 		
 	}
 	
-	@RequestMapping(value = "/showByPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public String showByPage( Integer pageNow, HttpServletRequest request) {
 		
 		if(pageNow==null || pageNow<1){
@@ -108,8 +104,8 @@ public class BookHandler {
 			pageNow=1;
 		}
 		
-		PageBean<SubBook> pb=this.bookService.showByPage(pageNow);
-		
+		PageBean<SubBook> pb=bookService.showAllByPage(pageNow);
+				
 		request.setAttribute("pb", pb);
 		
 		return "showBook";

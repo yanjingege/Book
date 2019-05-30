@@ -10,7 +10,7 @@ public interface BookService {
 
 	int save(Book book);
 
-	List<SubBook> list();
+	List<Book> list();
 
 	void delete(Book book);
 
@@ -18,6 +18,6 @@ public interface BookService {
 
 	void update(Book book);
 
-	PageBean<SubBook> showByPage(Integer pageNow);
+	PageBean<SubBook> showAllByPage(Integer pageNow);
 
 }

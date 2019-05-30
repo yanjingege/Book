@@ -3,19 +3,22 @@ package com.oracle.web.bean;
 public class SubBook extends Book {
 
 	
-	private Fenlei fenLei;
+	private Fenlei fenlei;
 
-	public Fenlei getFenLei() {
-		return fenLei;
+
+	public Fenlei getFenlei() {
+		return fenlei;
 	}
 
-	public void setFenLei(Fenlei fenLei) {
-		this.fenLei = fenLei;
+
+	public void setFenlei(Fenlei fenlei) {
+		this.fenlei = fenlei;
 	}
+
 
 	@Override
 	public String toString() {
-		return "SubBook [fenLei=" + fenLei + "]";
+		return "SubBook [fenlei=" + fenlei + "]";
 	}
 
 }

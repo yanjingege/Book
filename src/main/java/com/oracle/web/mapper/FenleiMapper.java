@@ -4,14 +4,21 @@ import com.oracle.web.bean.Fenlei;
 import java.util.List;
 
 public interface FenleiMapper {
-   
-    int deleteByPrimaryKey(Integer fid);
 
-    int insert(Fenlei record);
+	int deleteByPrimaryKey(Integer fid);
 
-    Fenlei selectByPrimaryKey(Integer fid);
+	int insert(Fenlei record);
 
-    List<Fenlei> selectAll();
+	Fenlei selectByPrimaryKey(Integer fid);
 
-    int updateByPrimaryKey(Fenlei record);
+	List<Fenlei> selectAll();
+
+	int updateByPrimaryKey(Fenlei record);
+
+	int counts();
+
+	List<Fenlei> selectAllByPageHelper();
+
+	Fenlei selectFenleiByFname(String fname);
+
 }

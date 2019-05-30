@@ -16,87 +16,162 @@
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <title>添加图书</title>
 <script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="jQuery/jquery-1.8.3.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$("#login").bootstrapValidator({
+var flag;
 
-			feedbackIcons : {
-				valid : "glyphicon glyphicon-ok",
-				invalid : "glyphicon glyphicon-remove",
-				validating : "glyphicon glyphicon-refresh"
-			},
-			fields : {
-				name : {
-					validators : {
-						notEmpty : {
-							message : '书名不能为空'
-						},
-						regexp : {
-							regexp : /^[\u0391-\uFFE5]{1,20}$/,
-							message : '书名必须是1~20个汉字'
-						},
-					}
-				},
-				price : {
-					validators : {
-						notEmpty : {
-							message : '书的价格不能为空'
-						},
-						regexp : {
-							regexp : /^[0-9]+$/,
-							message : '书的价格必须是数字'
-						},
+function validateBName() {
 
-					}
-				},
+	var bname = document.add.bname;
 
-				chuban : {
-					validators : {
-						notEmpty : {
-							message : '出版社不能为空'
-						},
-						regexp : {
-							regexp : /^[\u0391-\uFFE5]{5,10}$/,
-							message : '出版社必须是5~10位汉字'
-						},
-					}
-				},
-				zhuangtai : {
-					validators : {
-						notEmpty : {
-							message : '必须选择书籍的状态'
-						},
-					}
-				},
+	var nameReg = /^[\u0391-\uFFE5_A-z0-9]{1,15}$/;
 
-				jieshuren : {
-					validators : {
-						notEmpty : {
-							message : '借书人不能为空'
-						},
-						regexp : {
-							regexp : /^[\u0391-\uFFE5]{2,10}$/,
-							message : '借书人的名字必须是2~10位汉字'
-						},
-					}
-				},
+	var bNameMsg = document.getElementById("bNameMsg");
 
-				fname : {
-					validators : {
-						notEmpty : {
-							message : '图书分类不能为空'
-						},
-						regexp : {
-							regexp : /^[\u0391-\uFFE5]{2,10}$/,
-							message : '分类的名字必须是2~10位汉字'
-						},
-					}
+	ajax({
+		method : "POST",
+		url : "BookServlet",
+		params : "action=validateBName&bname=" + bname.value,
+		type : "text",
+		success : function(data) {
+			if (nameReg.test(bname.value)) {
 
+				//bnameMsg.style.color = "darkcyan";
+
+				//bnameMsg.innerHTML = "姓名合法";		
+
+				if (data == "1") {//图书名称已经存在
+
+					bNameMsg.style.color = "red";
+
+					bNameMsg.innerHTML = "此图书名称已经存在";
+
+					bname.focus();
+
+					flag = false;
+
+				} else {//图书名称不存在
+
+					bNameMsg.style.color = "darkcyan";
+
+					bNameMsg.innerHTML = "此图书名称可以添加";
+
+					flag = true;
 				}
+			} else {
+
+				bNameMsg.style.color = "red";
+
+				bNameMsg.innerHTML = "必须是长度为1-15的汉字字母数字下划线";
+
+				bname.focus();
+
+				flag = false;
 			}
 
-		});
+		}
+	})
+}
+//2.校验价格
+function validatePrice() {
+
+	var price = document.add.price;
+
+	var reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^0(\.\d{1,2})?$)/;
+
+	var priceMsg = document.getElementById("priceMsg");
+
+	if (reg.test(price.value)) {
+
+		priceMsg.style.color = "darkcyan";
+
+		priceMsg.innerHTML = "价格格式合法";
+
+		return true;
+	} else {
+
+		priceMsg.style.color = "red";
+
+		priceMsg.innerHTML = "价格格式不合法，正确格式为  52.11 或   52 或0.99";
+
+		price.focus();
+
+		return false;
+	}
+
+};
+
+window.onload = function() {
+
+	ajax({
+
+		method : "POST",
+
+		url : "FenleiServlet",
+
+		ansy : true,
+
+		params : "action=updateShowFenlei",
+
+		type : "xml",
+
+		success : function(data) {
+
+			var select = document.getElementById("fenleiList");
+
+			var names = data.getElementsByTagName("name");
+
+			for (var i = 0; i < names.length; i++) {
+
+				var name = names[i];
+
+				var opt = document.createElement("option");
+
+				var value;
+
+				if (window.addEventListener) {
+
+					value = name.textContent;
+
+				} else {
+
+					value = text;
+				}
+
+				opt.innerHTML = value;
+
+				opt.value = value;
+
+				select.appendChild(opt);
+			}
+		}
 	});
+};
+
+function addb() {
+
+	return (flag) && validatePrice();
+};
+
+$(function() {
+
+	$("tr:even").css("background-color", "transparent");
+
+	$("tr:odd").css("background-color", "transparent");
+
+	//事件
+	$("tr").mouseover(function() {
+
+		$(this).css("background-color", "LightYellow");
+	});
+
+	$("tr").mouseout(function() {
+
+		$("tr:even").css("background-color", "transparent");
+
+		$("tr:odd").css("background-color", "transparent");
+	});
+});
 </script>
 </head>
 <body background='images/03.jpg'>
@@ -104,75 +179,61 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
-				<form id="login" action="add" method="post">
-					<h3 class="text-center text-success">添加图书</h3>
+				<form action="book" method="post"  enctype="application/x-www-form-urlencoded" name="add"
+		           onsubmit="return addb()">
+		           <br>
+					<h3 class="text-center text-success"><font size="7" face="幼圆">添加图书</font></h3>
+                   <hr>
+
 
 					<div class="form-group">
 						<label>图&nbsp;书&nbsp;名&nbsp;称:</label> <input type="text"
-							name="name" class="form-control" />
+							name="bname" onblur="validateBName()" class="form-control" placeholder="图书名称"/>
+							 <span id="bNameMsg"></span>
 					</div>
-
 					<div class="form-group">
 						<label>图&nbsp;书&nbsp;价&nbsp;格:</label> <input type="text"
-							name="price" class="form-control" />
+							name="price" onblur="validatePrice()" class="form-control" placeholder="图书价格"/> <span
+							id="priceMsg"></span>
 					</div>
-					
 					<div class="form-group">
 						<label>出&nbsp;&nbsp;&nbsp;版&nbsp;&nbsp;&nbsp;社:</label> <input
-							type="text" name="chuban" class="form-control" />
+							type="text" name="chuban" class="form-control" placeholder="出版社"/>
 					</div>
-
-
 					<div class="form-group">
-						<label>状&nbsp;&nbsp;态：</label>
-						<div class="radio">
-							<label class="radio-inline"><input type="radio"
-								name="zhuangtai" value="未借出" />未借出</label> <label class="radio-inline"><input
-								type="radio" name="zhuangtai" value="借出" />借出</label>
+						<label>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="zhuangtai" value="未借出" checked/>未借出
+						</label> 
+						<label class="radio-inline"> 
+						<input type="radio" name="zhuangtai" value="借出"/>借出
+						</label>
+					</div>
+					<div class="form-group">
+						<label>借&nbsp;&nbsp;&nbsp;书&nbsp;&nbsp;&nbsp;人:</label> 
+						<input type="text" name="jieshuren" checked value="无" class="form-control"/> 
+					</div>
+					<br>
+					
+					
+                   <ul class="nav">
+						<li><b>请选择您想要添加的分类:</b></li>
+						<li><select name="fId" class="form-control">
+                            <c:forEach items="${list }" var="f">
+                               <option value="${f.fid }">${f.fname }</option>
+                            </c:forEach>
+                         </select></li>
+					</ul>
+					
+					
+			      <br>
+					<div class="form-group text-center">
+						<ul class="list-inline">
+							<li><button type="submit" class="btn btn-warning" style="width:200px;">添加</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="reset" class="btn btn-danger" style="width:200px;">重填</button></li>
+						</ul>
 						</div>
-					</div>
-					<div class="form-group">
-						<label>借&nbsp;&nbsp;&nbsp;书&nbsp;&nbsp;&nbsp;人:</label> <input
-							type="text" name="jieshuren" class="form-control" />
-					</div>
-
-					<div class="form-group">
-
-						<label for="Fenlei" class="col-sm-4 control-label">分&nbsp;&nbsp;类&nbsp;&nbsp;名&nbsp;&nbsp;称</label>
-
-						<input name="Fenlei" id="Fenlei" class="form-control" />
-
-
-					</div>
-
-					<div>
-						<label>分类Id</label> <select name="Fenlei" class="form-control">
-
-							<c:forEach items="${flist}" var="f">
-
-								<option value="${f.fid}">${f.fname}</option>
-
-							</c:forEach>
-						</select>
-					</div>
-					<br> <br>
-					<div class="form-group">
-						<div class="col-sm-12">
-							<center>
-								<button type="submit" class="btn btn-info">添加图书</button>
-							</center>
-						</div>
-					</div>
-
-					<br> <br>
-					<div class="form-group">
-						<div class="col-sm-12">
-							<center>
-								<button type="reset" class="btn btn-info">重置</button>
-							</center>
-						</div>
-					</div>
-
 				</form>
 
 			</div>

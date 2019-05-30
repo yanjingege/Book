@@ -1,24 +1,42 @@
 package com.oracle.web.bean;
 
 public class Fenlei {
-   
-    private Integer fid;
 
-    private String fname;
+	private Integer fid;
 
-    public Integer getFid() {
-        return fid;
-    }
+	private String fname;
 
-    public void setFid(Integer fid) {
-        this.fid = fid;
-    }
+	public Integer getFid() {
+		return fid;
+	}
 
-    public String getFname() {
-        return fname;
-    }
+	public void setFid(Integer fid) {
+		this.fid = fid;
+	}
 
-    public void setFname(String fname) {
-        this.fname = fname == null ? null : fname.trim();
-    }
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname == null ? null : fname.trim();
+	}
+	
+	@Override
+	public String toString() {
+		return "Fenlei [fid=" + fid + ", fname=" + fname + "]";
+	}
+
+
+	public Fenlei(Integer fid, String fname) {
+		super();
+		this.fid = fid;
+		this.fname = fname;
+	}
+
+
+	public Fenlei() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
