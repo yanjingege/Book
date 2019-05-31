@@ -24,7 +24,7 @@
 
 </style>
 <script>
-   <!-- window.onload = function() {
+   /* window.onload = function() {
 		var selectAll = document.getElementById("selectAll");
 		selectAll.onclick = function() {
 			var chek = document.getElementsByName("ids");
@@ -78,11 +78,11 @@
 				location.reload();
 			}
 		}
-	};  -->
+	};  */
 </script>
 </head>
 <body background='images/03.jpg'>
-<br/>
+<%-- <br/>
 <p align="center">
 		<font size="7" face="幼圆">查看图书</font>
 	</p>
@@ -92,7 +92,7 @@
 		<br>
 		<ul class="dropdown-menu dropdown-menu-left" role="menu">
 			<li>
-				<form action="BookServlet" class="form-horizontal"> 
+				<form action="" class="form-horizontal"> 
 					<!-- 隐藏域，用来传递action -->
 					<input type="hidden" name="action" value="showBookByWhere">
 					<div class="control-group   ">
@@ -142,12 +142,15 @@
 					</div>
 				</form>
 			</li>
-		</ul></div>
+		</ul></div> --%>
+		<p align="center">
+		<font size="7" face="幼圆">查看图书</font>
+	</p>
 	<table class="table table-striped table-hover table-bordered"
 				width="800" height="280" align="center" cellspacing="0" id="h1">
 		<tr align="center">
 			<td>图书编号</td>
-			<td>分类名称</td>
+			<!-- <td>分类名称</td> -->
 			<td>图书名称</td>
 			<td>图书价格</td>
 			<td>图书出版社</td>
@@ -156,17 +159,17 @@
 			<td>删除</td>
 			<td>修改</td>
 		</tr>
-		<c:forEach items="${pb.beanList }" var="b" varStatus="s">
+		<c:forEach items="${pb.beanList}" var="b" varStatus="s">
 			<tr align="center">
 				<td>${s.index+1 }</td>
-				<td>${b.fname}</td>
+				<%-- <td>${b.fenlei.fname}</td> --%>
 				<td>${b.name}</td>
 				<td>${b.price}</td>
 				<td>${b.chuban}</td>
 				<td>${b.zhuangtai}</td>
 				<td>${b.jieshuren}</td>
 				<td><input type="checkbox" name="ids" value="${b.id}"></td>
-				<td><a href="BookServlet?action=showOne&id=${b.id}">修改</a></td>
+				<td><a href="book?id=${b.id}">修改</a></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -182,10 +185,10 @@
 			</table>
 	<center>
 		<ul class="pagination">
-			<li><a href="${pb.url }&pageNow=1">首页</a></li>
+			<li><a href="books?pageNow=1">首页</a></li>
              <c:if test="${pb.pageNow>1 }">
 				<li><a
-					href="${pb.url }&pageNow=${pb.pageNow-1 }">上一页</a></li>
+					href="books?pageNow=${pb.pageNow-1 }">上一页</a></li>
 			</c:if>
              <!-- 分两种情况：如果页数小于10：如果页数大于10： -->
 			<c:choose>
@@ -213,7 +216,7 @@
 						<li class="active"><span>${i}</span></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="${pb.url }&pageNow=${i }">[${i }]</a></li>
+						<li><a href="books?pageNow=${i }">[${i }]</a></li>
 					</c:otherwise>
 				</c:choose>
 
@@ -223,12 +226,12 @@
 
             <c:if test="${pb.pageNow<pb.pages }">
 				<li><a
-					href="${pb.url }&pageNow=${pb.pageNow+1 }">下一页</a></li>
+					href="books?pageNow=${pb.pageNow+1 }">下一页</a></li>
 			</c:if>
 
 
             <li><a
-				href="${pb.url }&pageNow=${pb.pages }">尾页</a></li>
+				href="books?pageNow=${pb.pages }">尾页</a></li>
 		</ul>
 	</center>
 	<p align="center">第${pb.pageNow }页/共${pb.pages }页</p>

@@ -50,7 +50,7 @@
 	<div>
 	  <ul>
 	    <li><a href="addUI" target="right"><span class="ui-icon ui-icon-plusthick"></span>添加图书</a></li>
-	    <li><a href="showByPage" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看图书</a></li>	   
+	    <li><a href="books" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看图书</a></li>	   
 	  </ul>
 	</div>
 	    

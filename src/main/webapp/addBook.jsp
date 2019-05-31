@@ -22,7 +22,7 @@ var flag;
 
 function validateBName() {
 
-	var bname = document.add.bname;
+	var name = document.add.name;
 
 	var nameReg = /^[\u0391-\uFFE5_A-z0-9]{1,15}$/;
 
@@ -31,10 +31,10 @@ function validateBName() {
 	ajax({
 		method : "POST",
 		url : "BookServlet",
-		params : "action=validateBName&bname=" + bname.value,
+		params : "action=validateBName&name=" + name.value,
 		type : "text",
 		success : function(data) {
-			if (nameReg.test(bname.value)) {
+			if (nameReg.test(name.value)) {
 
 				//bnameMsg.style.color = "darkcyan";
 
@@ -46,7 +46,7 @@ function validateBName() {
 
 					bNameMsg.innerHTML = "此图书名称已经存在";
 
-					bname.focus();
+					name.focus();
 
 					flag = false;
 
@@ -64,7 +64,7 @@ function validateBName() {
 
 				bNameMsg.innerHTML = "必须是长度为1-15的汉字字母数字下划线";
 
-				bname.focus();
+				name.focus();
 
 				flag = false;
 			}
@@ -153,25 +153,8 @@ function addb() {
 	return (flag) && validatePrice();
 };
 
-$(function() {
 
-	$("tr:even").css("background-color", "transparent");
 
-	$("tr:odd").css("background-color", "transparent");
-
-	//事件
-	$("tr").mouseover(function() {
-
-		$(this).css("background-color", "LightYellow");
-	});
-
-	$("tr").mouseout(function() {
-
-		$("tr:even").css("background-color", "transparent");
-
-		$("tr:odd").css("background-color", "transparent");
-	});
-});
 </script>
 </head>
 <body background='images/03.jpg'>
@@ -188,7 +171,7 @@ $(function() {
 
 					<div class="form-group">
 						<label>图&nbsp;书&nbsp;名&nbsp;称:</label> <input type="text"
-							name="bname" onblur="validateBName()" class="form-control" placeholder="图书名称"/>
+							name="name" onblur="validateBName()" class="form-control" placeholder="图书名称"/>
 							 <span id="bNameMsg"></span>
 					</div>
 					<div class="form-group">
@@ -219,7 +202,7 @@ $(function() {
                    <ul class="nav">
 						<li><b>请选择您想要添加的分类:</b></li>
 						<li><select name="fId" class="form-control">
-                            <c:forEach items="${list }" var="f">
+                            <c:forEach items="${flist }" var="f">
                                <option value="${f.fid }">${f.fname }</option>
                             </c:forEach>
                          </select></li>
@@ -229,9 +212,10 @@ $(function() {
 			      <br>
 					<div class="form-group text-center">
 						<ul class="list-inline">
-							<li><button type="submit" class="btn btn-warning" style="width:200px;">添加</button>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button type="reset" class="btn btn-danger" style="width:200px;">重填</button></li>
+							<li><button type="submit" class="btn btn-warning" style="width:130px;">添加</button>
+						
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="reset" class="btn btn-danger" style="width:130px;">重填</button></li>
 						</ul>
 						</div>
 				</form>

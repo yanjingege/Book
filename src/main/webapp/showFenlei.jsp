@@ -63,9 +63,9 @@
 				  <td>${ss.index+1 }</td>
 					<td>${s.fid}</td>
 					<td>${s.fname}</td>
-					<td><a href="http://localhost/Book/fenlei_delete/${s.fid}"
+					<td><a href="http://localhost/book/fenlei_delete/${s.fid}"
 						class="deleteId btn btn-danger">删除</a></td>
-					<td><a href="http://localhost/Book/fenlei/${s.fid}"
+					<td><a href="http://localhost/book/fenlei/${s.fid}"
 						class="btn btn-success">修改</a></td>
 				</tr>
 			</c:forEach>
@@ -84,11 +84,11 @@
 			<p>
 			<p>第${pb.pageNow }页/共${pb.pages }页 &nbsp;&nbsp;&nbsp;&nbsp;
 			<ul class="pagination">
-				<li><a href="http://localhost/Book/fenleis/1">首页</a></li>
+				<li><a href="http://localhost/book/fenleis/1">首页</a></li>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<c:if test="${pb.pageNow>1}">
-					<li><a href="http://localhost/Book/fenleis/${pb.pageNow-1}">上一页</a></li>
+					<li><a href="http://localhost/book/fenleis/${pb.pageNow-1}">上一页</a></li>
 				</c:if>
 				&nbsp;&nbsp;
 
@@ -120,16 +120,16 @@
 							<li class="active"><span>${i }</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="http://localhost/Book/fenleis/${i}">${i}</a></li>
+							<li><a href="http://localhost/book/fenleis/${i}">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				&nbsp;&nbsp;
 				<c:if test="${pb.pageNow<pb.pages}">
-					<li><a href="http://localhost/Book/fenleis/${pb.pageNow+1}">下一页</a></li>
+					<li><a href="http://localhost/book/fenleis/${pb.pageNow+1}">下一页</a></li>
 				</c:if>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<li><a href="http://localhost/Book/fenleis/${pb.pages}">尾页</a></li>
+				<li><a href="http://localhost/book/fenleis/${pb.pages}">尾页</a></li>
 			</ul>
 
 		</center>

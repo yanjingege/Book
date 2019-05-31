@@ -97,7 +97,7 @@ public class BookHandler {
 	}
 	
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
-	public String showByPage( Integer pageNow, HttpServletRequest request) {
+	public String showByPage1(Integer pageNow, HttpServletRequest request) {
 		
 		if(pageNow==null || pageNow<1){
 			

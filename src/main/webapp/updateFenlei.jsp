@@ -24,7 +24,7 @@
 
          <hr width="1000px">
 
-		<form action="http://localhost/Book/fenleiupdate"  class="form-horizontal" method="post">
+		<form action="http://localhost/book/fenleiupdate"  class="form-horizontal" method="post">
          <!-- 做一个隐藏域，monsterId -->
          <input type="hidden" name="fid" value="${s.fid}">
          <!-- PUT -->
