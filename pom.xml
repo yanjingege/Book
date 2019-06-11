@@ -124,6 +124,15 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 	<!-- 配置插件 -->
@@ -146,7 +155,7 @@
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 
-					<webApp>${basedir}/target/Book</webApp>
+					<webApp>${basedir}/target/book</webApp>
 
 					<webAppConfig>
 						<!-- 访问路径 根路径访问，演示/test4又是什么情况 -->

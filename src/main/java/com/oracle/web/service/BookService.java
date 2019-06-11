@@ -12,12 +12,21 @@ public interface BookService {
 
 	List<Book> list();
 
-	void delete(Book book);
-
-	Book queryOne(Integer id);
+	SubBook queryOne(Integer id);
 
 	void update(Book book);
 
 	PageBean<SubBook> showAllByPage(Integer pageNow);
+
+	void delete(String[] arr);
+
+	List<Book> queryBooks(String[] arr);
+
+	List<Book> list2();
+
+	PageBean<SubBook> selectAllByPageHelperAndWhere(Book where, int pageNow);
+
+	Book validateName(String name);
+
 
 }

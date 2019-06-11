@@ -93,9 +93,9 @@
 				&nbsp;&nbsp;
 
 				<!-- 分页两种情况:
-		     如果页面小于10；
-		     如果页面大于10
-		 -->
+		             如果页面小于10；
+		             如果页面大于10
+		        -->
 				<c:choose>
 					<c:when test="${pb.pages<=10}">
 						<c:set var="begin" value="1"></c:set>

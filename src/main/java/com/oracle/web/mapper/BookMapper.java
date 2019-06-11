@@ -7,11 +7,9 @@ import java.util.List;
 
 public interface BookMapper {
     
-    int deleteByPrimaryKey(Integer id);
-
     int insert(Book record);
 
-    Book selectByPrimaryKey(Integer id);
+    SubBook selectByPrimaryKey(Integer id);
 
     List<Book> selectAll();
 
@@ -20,4 +18,17 @@ public interface BookMapper {
     int selectCounts();
     
 	List<SubBook> showAllByPage();
+
+	int deleteByPrimaryKey(String[] arr);
+
+	List<Book> queryBooks(String[] arr);
+
+	List<Book> selectAll2();
+
+	List<SubBook> selectAllByPageHelperAndWhere(Book where);
+
+	//Book selectByPrimaryKey(String name);
+
+	Book validateName(String name);
+
 }

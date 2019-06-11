@@ -4,7 +4,7 @@ public class Book {
  
     private Integer id;
 
-    private String fname;
+    //private String fname;
 
     private String name;
 
@@ -26,13 +26,13 @@ public class Book {
         this.id = id;
     }
 
-    public String getFname() {
-        return fname;
-    }
+  //  public String getFname() {
+   //     return fname;
+   // }
 
-    public void setFname(String fname) {
-        this.fname = fname == null ? null : fname.trim();
-    }
+   // public void setFname(String fname) {
+   //     this.fname = fname == null ? null : fname.trim();
+   // }
 
     public String getName() {
         return name;
@@ -82,11 +82,11 @@ public class Book {
         this.fId = fId;
     }
 
-	public Book(Integer id, String fname, String name, String price, String chuban, String zhuangtai, String jieshuren,
+	public Book(Integer id,String name, String price, String chuban, String zhuangtai, String jieshuren,
 			Integer fId) {
 		super();
 		this.id = id;
-		this.fname = fname;
+		//this.fname = fname;
 		this.name = name;
 		this.price = price;
 		this.chuban = chuban;

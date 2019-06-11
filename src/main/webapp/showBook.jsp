@@ -16,15 +16,18 @@
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="js/ajax.js"></script>
 <script type="text/javascript" src="jQuery/jquery-1.8.3.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
 <title>查看图书</title>
+	
 <style type="text/css">
 #h1{
  width:800px;
-}
+}s
 
 </style>
-<script>
-   /* window.onload = function() {
+<script type="text/javascript">
+  window.onload = function() {
 		var selectAll = document.getElementById("selectAll");
 		selectAll.onclick = function() {
 			var chek = document.getElementsByName("ids");
@@ -50,10 +53,11 @@
 				}
 			}
 		};
-		var deleteFenlei = document.getElementById("deleteBook");
-		deleteFenlei.onclick = function() {
+		
+		var deleteBook = document.getElementById("deleteBook");
+		deleteBook.onclick = function() {
 			var chek = document.getElementsByName("ids");
-			alert(chek.length);
+			
 			var flag = false;
 			for (var i = 0; i < chek.length; i++) {
 				if (chek[i].checked == true) {
@@ -62,6 +66,16 @@
 				}
 			}
 
+			if(flag == false){
+				
+				alert("请至少勾选一个进行删除")
+				
+				location.href="http://localhost/book/books"
+				
+				return;
+			}
+			
+			//如果选择了
 			var str = "";
 			for (var i = 0; i < chek.length; i++) {
 				if (chek[i].checked == true) {
@@ -69,20 +83,107 @@
 				}
 			}
 
+			//去除最后一个逗号
 			str = str.slice(0, str.length - 1);
-			alert(str);
+			
+			//发送给服务器
 			var queren = confirm("您确认要删除这些图书吗");
 			if (queren == true) {
-				location.href = "BookServlet?action=delete&ids=" + str;
+
+				var $url = "http://localhost/book/delete/" + str
+				
+				//alert($url);
+
+				$("#deleteForm").attr("action", $url);
+
+				$("#deleteForm").submit();
+
+				return false;
+			
 			} else {
+				
 				location.reload();
 			}
 		}
-	};  */
+		
+		//导出全部
+		var outAll = document.getElementById("outAll");
+		
+		outAll.onclick = function(){
+			
+			var flag = confirm("你确定要导出所有分类？");
+			
+			if(flag){
+				
+				window.location.href = "outAll";
+			}
+		};
+		
+		
+		var outSelect=document.getElementById("outSelect");
+		
+		outSelect.onclick=function(){
+			
+	       var chek=document.getElementsByName("ids");
+			
+			//判断一下,选了没有
+			var flag=false;
+			
+			for(var i=0;i<chek.length;i++){
+				
+				if(chek[i].checked==true){
+					
+					flag=true;
+					
+					break;
+				}
+			}
+			
+			if(flag==false){
+				
+				alert("请至少勾选一个进行导出");
+				
+				location.href = "outSelect/";
+				
+				return;
+			}
+			
+			//如果选择了
+			var str="";
+			
+			for(var i=0;i<chek.length;i++){
+				
+				if(chek[i].checked==true){
+					
+					str+=chek[i].value+",";
+				}
+			}
+			
+			//去除最后一个逗号
+			str=str.slice(0,str.length-1);
+						
+			//发送给服务器
+			queren=confirm("您确认导出这些勾选的图书的信息吗？");
+			
+			if(queren==true){
+				
+				location.href = "outSelect/" + str;
+			}else{
+				
+				location.reload();
+
+			}
+			
+		}
+		
+		
+	};  
 </script>
 </head>
 <body background='images/03.jpg'>
-<%-- <br/>
+
+<!-- 
+ <br/>
 <p align="center">
 		<font size="7" face="幼圆">查看图书</font>
 	</p>
@@ -92,9 +193,9 @@
 		<br>
 		<ul class="dropdown-menu dropdown-menu-left" role="menu">
 			<li>
-				<form action="" class="form-horizontal"> 
+				<form action="" class="form-horizontal">  -->
 					<!-- 隐藏域，用来传递action -->
-					<input type="hidden" name="action" value="showBookByWhere">
+				<!--  <input type="hidden" name="action" value="showBookByWhere">
 					<div class="control-group   ">
 						<br> <label class="col-md-4">分类： </label>
 						<div class="col-sm-7">
@@ -142,7 +243,10 @@
 					</div>
 				</form>
 			</li>
-		</ul></div> --%>
+		</ul></div>   -->
+		
+		
+		
 		<p align="center">
 		<font size="7" face="幼圆">查看图书</font>
 	</p>
@@ -150,7 +254,7 @@
 				width="800" height="280" align="center" cellspacing="0" id="h1">
 		<tr align="center">
 			<td>图书编号</td>
-			<!-- <td>分类名称</td> -->
+			 <td>分类名称</td>
 			<td>图书名称</td>
 			<td>图书价格</td>
 			<td>图书出版社</td>
@@ -162,28 +266,39 @@
 		<c:forEach items="${pb.beanList}" var="b" varStatus="s">
 			<tr align="center">
 				<td>${s.index+1 }</td>
-				<%-- <td>${b.fenlei.fname}</td> --%>
+				<td>${b.fenleis.fname}</td> 
 				<td>${b.name}</td>
 				<td>${b.price}</td>
 				<td>${b.chuban}</td>
 				<td>${b.zhuangtai}</td>
 				<td>${b.jieshuren}</td>
-				<td><input type="checkbox" name="ids" value="${b.id}"></td>
-				<td><a href="book?id=${b.id}">修改</a></td>
+			    <td><input type="checkbox" name="ids" value="${b.id }"/></td>
+				<td><a href="book/${b.id }" class="btn btn-primary">修改</a></td>
+
+						
 			</tr>
-		</c:forEach>
+		</c:forEach>		
+		
 	</table>
+	
+		<!-- 准备一个隐藏表单 -->
+		 <form action="" method="post" id="deleteForm">
+			<input type="hidden" name="_method" value="DELETE">
+		</form>
+	
 	<table  align="center">
 	<tr align="center">
-
-					<td colspan="9"><button id="selectAll"
-							class="btn btn-success btn-sm">全选</button>
+					<td colspan="9"><button id="selectAll" class="btn btn-success btn-sm">全选</button>
 						<button id="noSelectAll" class="btn btn-success btn-sm">全不选</button>
 						<button id="fanxuan" class="btn btn-success btn-sm">反选</button>
-						<button id="deleteBook" class="btn btn-success btn-sm">删除</button></td>
+						<button id="deleteBook" class="btn btn-success btn-sm">删除</button>
+				     	<button id="outSelect" class="btn btn-success btn-sm">导出所选</button>
+				 		<button id="outAll" class="btn btn-success btn-sm">导出全部</button>
+				 
 				</tr>
 			</table>
 	<center>
+	
 		<ul class="pagination">
 			<li><a href="books?pageNow=1">首页</a></li>
              <c:if test="${pb.pageNow>1 }">
@@ -236,10 +351,5 @@
 	</center>
 	<p align="center">第${pb.pageNow }页/共${pb.pages }页</p>
 
-
-	<p align="center">
-		<font size="4" color="#4682B4">没有您想要的图书？您可以点击这里</font><a
-						href="addBook.jsp" class="btn btn-primary btn-sm">添加分类</a>
-	</p>
-</body>
+</body> 
 </html>
