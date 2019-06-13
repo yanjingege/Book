@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,57 +22,230 @@
 <script type="text/javascript">
 	$(function() {
 
-		$(".deleteId").click(function() {
+		var chek = document.getElementsByName("ids");
 
-			var $url = this.href;
+		var selectAll = document.getElementById("selectAll");
 
-			$("#deleteForm").attr("action", $url);
+		selectAll.onclick = function() {
+			//全选
 
-			//提交表单 
+			for (i = 0; i < chek.length; i++) {
 
-			$("#deleteForm").submit();
+				chek[i].checked = true;
 
-			return false;
+			}
 
-		});
+		}
+		//全不选
+		var selectNot = document.getElementById("noselectAll");
+
+		selectNot.onclick = function() {
+
+			for (i = 0; i < chek.length; i++) {
+
+				chek[i].checked = false;
+
+			}
+
+		}
+
+		//反选
+		var fanxuan = document.getElementById("fanxuan");
+		var chek = document.getElementsByName("ids");
+
+		fanxuan.onclick = function() {
+
+			for (i = 0; i < chek.length; i++) {
+				if (chek[i].checked == true) {
+					chek[i].checked = false;
+
+				} else {
+					chek[i].checked = true;
+
+				}
+
+			}
+
+		}
+
+		var deleteFenlei = document.getElementById("deleteFenlei");
+
+		deleteFenlei.onclick = function() {
+
+			var chek = document.getElementsByName("ids");
+
+			var flag = false;
+
+			for (i = 0; i < chek.length; i++) {
+
+				if (chek[i].checked == true) {
+					flag = true;
+					break;
+				}
+			}
+
+			if (flag == false) {
+				alert("请至少选一项");
+				location.href = "http://locahost/fenleis"
+				return;
+
+			}
+
+			var str = "";
+
+			for (var i = 0; i < chek.length; i++) {
+
+				if (chek[i].checked == true) {
+
+					str += chek[i].value + ",";
+
+				}
+			}
+			str = str.slice(0, str.length - 1);
+
+			var flag = confirm("你确定删除所勾选的分类吗？");
+			if (flag == true) {//确定
+				//拿到请求地址
+
+				var $url = "http://localhost/book/delete/" + str;
+
+				alert($url);
+
+				//拿到表单
+				$("#deleteForm").attr("action", $url);
+
+				//提交表单
+				$("#deleteForm").submit();
+
+				return false;
+
+			} else {//取消
+
+				//window.location.href = "http://localhost/book/fenleis/1";
+				location.reload();
+
+			}
+
+		};
+
+		//导出部分	  
+		var outIds = document.getElementById("outIds");
+
+		outIds.onclick = function() {
+
+			var flag = false;
+
+			for (i = 0; i < chek.length; i++) {
+
+				if (chek[i].checked == true) {
+					flag = true;
+					break;
+				}
+			}
+
+			if (flag == false) {
+				alert("请至少选一项");
+				return;
+
+			} else {
+
+				var str = "";
+
+				for (var i = 0; i < chek.length; i++) {
+
+					if (chek[i].checked == true) {
+
+						str += chek[i].value + ",";
+
+					}
+				}
+				str = str.slice(0, str.length - 1);
+
+				var flag = confirm("你确定导出所勾选的分类信息吗？");
+				if (flag == true) {//确定
+					window.location.href = "http://localhost/book/outPutFenlei/"
+							+ str;
+
+				} else {//取消
+
+					window.location.href = "http://localhost/book/fenleis1";
+				}
+			}
+		};
+		//导出全部
+		var outAll = document.getElementById("outAll");
+		outAll.onclick = function() {
+			var flag = confirm("你确定导出全部的分类信息吗？");
+			if (flag == true) {//确定
+				window.location.href = "http://localhost/book/outPutFenlei/a";
+
+			} else {//取消
+
+				window.location.href = "http://localhost/book/fenleis1/${pb.pageNow}";
+			}
+
+		}
+	});
+	/* 
+	  $(function() {
+
+	$(".deleteId").click(function() {
+
+		var $url = this.href;
+
+		$("#deleteForm").attr("action", $url);
+
+		//提交表单 
+
+		$("#deleteForm").submit();
+
+		return false;
 
 	});
-	
-	
-	
-	
+
+	});   */
 </script>
 
 </head>
-<body background="images/03.jpg">
-	<div class="container">
+<body >
+
+	<div class="container" >
 		<h1 align="center">图书管理系统----分类列表页</h1>
 		<hr width="1300px">
 
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a id="selectAll"
+				href="#">全选</a></li>
+			<li role="presentation"><a id="noselectAll" href="#">全不选</a></li>
+			<li role="presentation"><a id="fanxuan" href="#">反选</a></li>
+			<li role="presentation"><a id="outIds" href="#">导出选中</a></li>
+			<li role="presentation"><a id="outAll" href="#">导出全部</a></li>
+			<li role="presentation"><a id="deleteFenlei" href="#">删除</a></li>
+		</ul>
+
+		<p>
 		<table class="table table-bordered table-hover table-striped">
 			<tr>
 				<td>选择</td>
 				<td>编号</td>
 				<td>id</td>
 				<td>分类名称</td>
-				<td>删除</td>
 				<td>修改</td>
 			</tr>
 			<c:forEach items="${pb.beanList}" var="s" varStatus="ss">
 				<tr>
-				<td><input type="checkbox" name="ids" value="${s.fid }" /></td>
-				  <td>${ss.index+1 }</td>
+					<td><input type="checkbox" name="ids" value="${s.fid }" /></td>
+					<td>${ss.index+1 }</td>
 					<td>${s.fid}</td>
 					<td>${s.fname}</td>
-					<td><a href="http://localhost/Book/fenlei_delete/${s.fid}"
-						class="deleteId btn btn-danger">删除</a></td>
-					<td><a href="http://localhost/Book/fenlei/${s.fid}"
+					<%--  <td><a href="http://localhost/book/fenlei_delete/${s.fid}"
+						class="deleteId btn btn-danger">删除</a></td>   --%>
+
+					<td><a href="http://localhost/book/fenlei/${s.fid}"
 						class="btn btn-success">修改</a></td>
 				</tr>
 			</c:forEach>
 
-			
-			
 		</table>
 		<!-- 准备一个隐藏表单 -->
 		<form action="" method="POST" id="deleteForm">
@@ -84,11 +258,11 @@
 			<p>
 			<p>第${pb.pageNow }页/共${pb.pages }页 &nbsp;&nbsp;&nbsp;&nbsp;
 			<ul class="pagination">
-				<li><a href="http://localhost/Book/fenleis/1">首页</a></li>
+				<li><a href="http://localhost/book/fenleis/1">首页</a></li>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<c:if test="${pb.pageNow>1}">
-					<li><a href="http://localhost/Book/fenleis/${pb.pageNow-1}">上一页</a></li>
+					<li><a href="http://localhost/book/fenleis/${pb.pageNow-1}">上一页</a></li>
 				</c:if>
 				&nbsp;&nbsp;
 
@@ -120,16 +294,16 @@
 							<li class="active"><span>${i }</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="http://localhost/Book/fenleis/${i}">${i}</a></li>
+							<li><a href="http://localhost/book/fenleis/${i}">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				&nbsp;&nbsp;
 				<c:if test="${pb.pageNow<pb.pages}">
-					<li><a href="http://localhost/Book/fenleis/${pb.pageNow+1}">下一页</a></li>
+					<li><a href="http://localhost/book/fenleis/${pb.pageNow+1}">下一页</a></li>
 				</c:if>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<li><a href="http://localhost/Book/fenleis/${pb.pages}">尾页</a></li>
+				<li><a href="http://localhost/book/fenleis/${pb.pages}">尾页</a></li>
 			</ul>
 
 		</center>
