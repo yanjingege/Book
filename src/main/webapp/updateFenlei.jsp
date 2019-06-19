@@ -17,7 +17,7 @@
 	href="http://localhost/book/bootstrap/css/bootstrapValidator.css" />
 <script type="text/javascript"
 	src="http://localhost/book/bootstrap/js/bootstrapValidator.js"></script>
-<title>修改用户信息</title>
+<title>修改分类信息</title>
 
 <script type="text/javascript" src="http://localhost/book/js/ajax.js"></script>
 <script type="text/javascript">
@@ -39,11 +39,11 @@ $(function(){/* 文档加载，执行一个函数*/
                         message: '分类名不能为空'
                     },
                     stringLength: {
-                        min: 2,
+                        min: 1,
                         max: 15,
-                        message: '分类名长度必须在2到15之间'
+                        message: '分类名长度必须在1到15之间'
                     },
-                    threshold :  2 , //有6字符以上才发送ajax请求，（input中输入一个字符，插件会向服务器发送一次，设置限制，6字符以上才开始）
+                    threshold :  1 , //有6字符以上才发送ajax请求，（input中输入一个字符，插件会向服务器发送一次，设置限制，6字符以上才开始）
                     remote: {//ajax验证。server result:{"valid",true or false} 向服务发送当前input name值，获得一个json数据。例表示正确：{"valid",true}  
                         url: 'http://localhost/book/queryone',//验证地址
                         message: '分类名已存在',//提示消息

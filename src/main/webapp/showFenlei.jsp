@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +16,7 @@
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>查看分类</title>
 
 <script type="text/javascript">
 	$(function() {
@@ -37,9 +36,9 @@
 
 		}
 		//全不选
-		var selectNot = document.getElementById("noselectAll");
+		var noselectAll = document.getElementById("noselectAll");
 
-		selectNot.onclick = function() {
+		noselectAll.onclick = function() {
 
 			for (i = 0; i < chek.length; i++) {
 
@@ -214,8 +213,7 @@
 		<hr width="1300px">
 
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a id="selectAll"
-				href="#">全选</a></li>
+			<li role="presentation" class="active"><a id="selectAll" href="#">全选</a></li>
 			<li role="presentation"><a id="noselectAll" href="#">全不选</a></li>
 			<li role="presentation"><a id="fanxuan" href="#">反选</a></li>
 			<li role="presentation"><a id="outIds" href="#">导出选中</a></li>
