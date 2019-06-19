@@ -4,8 +4,6 @@ public class Book {
  
     private Integer id;
 
-    //private String fname;
-
     private String name;
 
     private String price;
@@ -25,14 +23,6 @@ public class Book {
     public void setId(Integer id) {
         this.id = id;
     }
-
-  //  public String getFname() {
-   //     return fname;
-   // }
-
-   // public void setFname(String fname) {
-   //     this.fname = fname == null ? null : fname.trim();
-   // }
 
     public String getName() {
         return name;
@@ -86,7 +76,6 @@ public class Book {
 			Integer fId) {
 		super();
 		this.id = id;
-		//this.fname = fname;
 		this.name = name;
 		this.price = price;
 		this.chuban = chuban;

@@ -76,7 +76,6 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	public void delete(String[] arr) {
 		// TODO Auto-generated method stub
-		
 		this.bookMapper.deleteByPrimaryKey(arr);
 	}
 

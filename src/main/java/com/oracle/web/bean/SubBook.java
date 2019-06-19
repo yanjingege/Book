@@ -16,8 +16,5 @@ public class SubBook extends Book {
 	public String toString() {
 		return "SubBook [fenleis=" + fenleis + "]";
 	}
-
-
-	
 	
 }

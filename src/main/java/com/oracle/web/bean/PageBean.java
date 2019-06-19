@@ -13,6 +13,8 @@ public class PageBean<T> implements Serializable{
 	
 	private int pageSize;
 	
+	private String url;
+	
 	private List<T>  beanList;
 
 	public int getPageNow() {
@@ -38,16 +40,20 @@ public class PageBean<T> implements Serializable{
 		return (this.counts%this.pageSize==0)?pages:pages+1;
 	}
 
-//	public void setPages(int pages) {
-//		this.pages = pages;
-//	}
-
 	public int getPageSize() {
 		return pageSize;
 	}
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public List<T> getBeanList() {
@@ -60,8 +66,16 @@ public class PageBean<T> implements Serializable{
 
 	@Override
 	public String toString() {
-		return "PageBean [pageNow=" + pageNow + ", counts=" + counts + ", pageSize=" + pageSize + ", beanList="
-				+ beanList + "]";
+		return "PageBean [pageNow=" + pageNow + ", counts=" + counts + ", pageSize=" + pageSize + ", url=" + url
+				+ ", beanList=" + beanList + "]";
 	}
+
+//	@Override
+//	public String toString() {
+//		return "PageBean [pageNow=" + pageNow + ", counts=" + counts + ", pageSize=" + pageSize + ", beanList="
+//				+ beanList + "]";
+//	}
 	
+	
+
 }

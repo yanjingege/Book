@@ -27,8 +27,6 @@ public interface BookMapper {
 
 	List<SubBook> selectAllByPageHelperAndWhere(Book where);
 
-	//Book selectByPrimaryKey(String name);
-
 	Book validateName(String name);
 
 }

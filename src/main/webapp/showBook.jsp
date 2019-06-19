@@ -4,26 +4,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 1.要使用Bootstrap的话，必须是html5文档 -->
 <meta charset="UTF-8">
-<!-- 2.移动设备优先 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 3.导入核心的css文件 -->
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-<!-- 4.需要引入JQuery文件 -->
 <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
-<!-- 5.引入BootStrap的核心JS文件 -->
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="js/ajax.js"></script>
-<script type="text/javascript" src="jQuery/jquery-1.8.3.js"></script> 
-<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-1.8.3.js"></script> 
+ -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 
 <title>查看图书</title>
-	
 <style type="text/css">
 #h1{
  width:800px;
-}s
+}
 
 </style>
 <script type="text/javascript">
@@ -176,35 +179,43 @@
 			
 		}
 		
-		
 	};  
 </script>
 </head>
 <body background='images/03.jpg'>
-
-<!-- 
  <br/>
-<p align="center">
-		<font size="7" face="幼圆">查看图书</font>
-	</p>
-	<div class="dropdown  col-md-offset-3"><a href="#" class="dropdown-toggle"
-		data-toggle="dropdown"><font size="4" face="幼圆"><span class="glyphicon glyphicon-search">高级搜索</span></font><span class="caret"></span></a>
+	<div class="dropdown  col-md-offset-3">
+	 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	    <font size="4" face="幼圆">
+	      <span class="glyphicon glyphicon-search">高级搜索</span>
+	    </font>
+	    <span class="caret"></span>
+	 </a>
 		<div class="col-md-1 "></div>
 		<br>
 		<ul class="dropdown-menu dropdown-menu-left" role="menu">
 			<li>
-				<form action="" class="form-horizontal">  -->
+				<form action="" class="form-horizontal">  
 					<!-- 隐藏域，用来传递action -->
-				<!--  <input type="hidden" name="action" value="showBookByWhere">
+				  <input type="hidden" name="action" value="bookByWhere">
 					<div class="control-group   ">
 						<br> <label class="col-md-4">分类： </label>
 						<div class="col-sm-7">
-							<select name="fname" class="form-control  input-sm">
+							 <select name="fname" class="form-control  input-sm">
 								<option value="0">--请选择分类--</option>
-								<c:forEach items="${list }" var="b">
+								<%-- <c:forEach items="${flist }" var="b">
 									<option>${b.fname}</option>
-								</c:forEach>
-							</select><br>
+								</c:forEach> --%>
+								<c:forEach items="${f}" var="f" >
+						 <c:if test="${f.fid==b.fenleis.fid}">
+								<option value="${f.fid}" selected="selected">${f.fname}</option>
+							</c:if>
+							<c:if test="${f.fid!=b.fenleis.fid }">
+							 	<option value="${f.fid}">${f.fname}</option>
+							 </c:if>
+						</c:forEach>
+							</select><br> 
+			
 						</div>
 					</div>
 					<div class="control-group  ">
@@ -232,7 +243,6 @@
 						</div>
 					</div>
 
-
 					<div class="control-group  ">
                       <label class="col-sm-4 "></label>
 						<div class="controls ss">
@@ -243,18 +253,18 @@
 					</div>
 				</form>
 			</li>
-		</ul></div>   -->
+		</ul>
+		</div>  
 		
 		
-		
-		<p align="center">
+	<p align="center">
 		<font size="7" face="幼圆">查看图书</font>
 	</p>
 	<table class="table table-striped table-hover table-bordered"
-				width="800" height="280" align="center" cellspacing="0" id="h1">
+		width="800" height="280" align="center" cellspacing="0" id="h1">
 		<tr align="center">
 			<td>图书编号</td>
-			 <td>分类名称</td>
+		    <td>分类名称</td>
 			<td>图书名称</td>
 			<td>图书价格</td>
 			<td>图书出版社</td>
@@ -262,7 +272,7 @@
 			<td>借书人</td>
 			<td>删除</td>
 			<td>修改</td>
-		</tr>
+		 </tr>
 		<c:forEach items="${pb.beanList}" var="b" varStatus="s">
 			<tr align="center">
 				<td>${s.index+1 }</td>
@@ -273,9 +283,7 @@
 				<td>${b.zhuangtai}</td>
 				<td>${b.jieshuren}</td>
 			    <td><input type="checkbox" name="ids" value="${b.id }"/></td>
-				<td><a href="book/${b.id }" class="btn btn-primary">修改</a></td>
-
-						
+				<td><a href="book/${b.id }" class="btn btn-primary">修改</a></td>	
 			</tr>
 		</c:forEach>		
 		
@@ -287,18 +295,17 @@
 		</form>
 	
 	<table  align="center">
-	<tr align="center">
-					<td colspan="9"><button id="selectAll" class="btn btn-success btn-sm">全选</button>
-						<button id="noSelectAll" class="btn btn-success btn-sm">全不选</button>
-						<button id="fanxuan" class="btn btn-success btn-sm">反选</button>
-						<button id="deleteBook" class="btn btn-success btn-sm">删除</button>
-				     	<button id="outSelect" class="btn btn-success btn-sm">导出所选</button>
-				 		<button id="outAll" class="btn btn-success btn-sm">导出全部</button>
-				 
-				</tr>
-			</table>
-	<center>
+	    <tr align="center">
+			<td colspan="9"><button id="selectAll" class="btn btn-success btn-sm">全选</button>
+				<button id="noSelectAll" class="btn btn-success btn-sm">全不选</button>
+				<button id="fanxuan" class="btn btn-success btn-sm">反选</button>
+				<button id="deleteBook" class="btn btn-success btn-sm">删除</button>
+				<button id="outSelect" class="btn btn-success btn-sm">导出所选</button>
+				<button id="outAll" class="btn btn-success btn-sm">导出全部</button>
+		</tr>
+	</table>
 	
+	<center>
 		<ul class="pagination">
 			<li><a href="books?pageNow=1">首页</a></li>
              <c:if test="${pb.pageNow>1 }">
@@ -335,7 +342,6 @@
 					</c:otherwise>
 				</c:choose>
 
-
 			</c:forEach>
 
 
@@ -344,9 +350,9 @@
 					href="books?pageNow=${pb.pageNow+1 }">下一页</a></li>
 			</c:if>
 
-
-            <li><a
-				href="books?pageNow=${pb.pages }">尾页</a></li>
+            <li>
+               <a href="books?pageNow=${pb.pages }">尾页</a>
+            </li>
 		</ul>
 	</center>
 	<p align="center">第${pb.pageNow }页/共${pb.pages }页</p>

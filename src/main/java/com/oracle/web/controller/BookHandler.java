@@ -59,7 +59,6 @@ public class BookHandler {
 //		return "showBook";
 //	}
 	
-	
 	@RequestMapping(value = "/addUI", method = RequestMethod.GET)
 	public String addUI(HttpServletRequest request) {
 
@@ -83,18 +82,11 @@ public class BookHandler {
 	public String delete(@PathVariable(value="id") String ids){
 	
 		String[] arr = ids.split(",");
-//		
-//		for (String string : arr) {
-//			
-//			System.out.println(string);
-//			
-//		}
 		
 		bookService.delete(arr);
 
 		return  "redirect:/books";
 	
-		
 	}
 	
 	@RequestMapping(value="/book/{id}",method=RequestMethod.GET)
@@ -121,22 +113,7 @@ public class BookHandler {
 				
 	}
 	
-	@RequestMapping(value = "/books", method = RequestMethod.GET)
-	public String showByPage1(Integer pageNow, HttpServletRequest request) {
-		
-		if(pageNow==null || pageNow<1){
-			
-			pageNow=1;
-		}
-		
-		PageBean<SubBook> pb=bookService.showAllByPage(pageNow);
-				
-		request.setAttribute("pb", pb);
-		
-		return "showBook";
-		
-	}
-	
+
 	
     //导出
 	@RequestMapping(value = "/outSelect/{booksIds}", method = RequestMethod.GET)
@@ -292,7 +269,6 @@ public class BookHandler {
 	}
 
 	//导出全部
-	
 	@RequestMapping(value = "/outAll", method = RequestMethod.GET)
 	public String outAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
@@ -442,33 +418,12 @@ public class BookHandler {
 
 	}
 	
-	//验证
-//	@RequestMapping(value = "validate.action")
-//	@ResponseBody
-//	public String validateName(String name,HttpServletResponse response) throws IOException{
-//
-//		Book b =this.bookService.validateName(name);
-//
-//		response.setContentType("text/html;charset=utf-8");
-//
-//        if(b!=null){
-//			
-//           response.getWriter().write("{\"valid\":\"false\"}");
-//		
-//			}else{
-//			
-//				response.getWriter().write("{\"valid\":\"true\"}");//不存在
-//			}
-//		
-//		return NONE;
-//
-//	}
-	
-	@RequestMapping(value = "validateName.action")
+	//验证	
+	@RequestMapping(value = "validateName")
 	@ResponseBody
 	public String queryByname(String name,HttpServletResponse response) throws IOException{
 		
-		System.out.println(name);
+		//System.out.println(name);
 		
 		Book b =bookService.validateName(name);
 		
@@ -484,13 +439,39 @@ public class BookHandler {
 		}
 		return NONE;
 	}
-
+	
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public String showByPage1(Integer pageNow, HttpServletRequest request) {
+		
+		if(pageNow==null || pageNow<1){
+			
+			pageNow=1;
+		}
+		
+		PageBean<SubBook> pb=bookService.showAllByPage(pageNow);
+				
+		request.setAttribute("pb", pb);
+		
+		return "showBook";
+		
+	}
 	
 	//高级搜索
-	@RequestMapping(value = "bookByWhere/{pageNow}",method=RequestMethod.GET)
-	public String ByWhere(Book where,@PathVariable("pageNow") int pageNow, HttpServletRequest request){
+	@RequestMapping(value = "bookByWhere",method=RequestMethod.GET)
+	public String ByWhere(Book where, Integer pageNow, HttpServletRequest request){
+		
+        if(pageNow==null || pageNow<1){
+			
+			pageNow=1;
+		}
+		
+		String url = this.getURL2(request);
+		
+		System.out.println(url);
 		
 		PageBean<SubBook> pb = bookService.selectAllByPageHelperAndWhere(where,pageNow);
+		
+		pb.setUrl(url);
 		
 		request.setAttribute("pb", pb);
 		
@@ -499,6 +480,35 @@ public class BookHandler {
 		request.setAttribute("flist", list);
 		
 		return "showBook";
+	}
+
+	private String getURL2(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		String url = this.getURL(request);
+		
+		int index = url.lastIndexOf("/");
+		
+		System.out.println(url.substring(index+1));
+		
+		if(index == -1){
+			
+			return url;
+		}
+		
+		return url.substring(index+1);
+	}
+
+	private String getURL(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		String path = request.getContextPath();
+		
+		String servlet = request.getServletPath();
+		
+		String param = request.getQueryString();
+		
+		return path+servlet+"?"+param;
 	}
 	
 }
