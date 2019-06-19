@@ -1,153 +1,68 @@
- //1.µÃµ½XMLHttpRequest¶ÔÏó
+function getXMLHttpRequest() {
+	try {
+		return new XMLHttpRequest;
+	} catch (e) {
+		// TODO handle the exception
+		try {
+			return new ActiveXObject("Msxml2.XMLHTTOP");
+		} catch (e) {
+			try {
+				return new ActiveXObject("Microsoft.XMLHTTOP");
 
-       function getXMLHttpRequest(){
-       	
-       	
-       	   try{//·ÇIEä¯ÀÀÆ÷
-       	   	
-       	   	return  new XMLHttpRequest();
-       	   	
-       	   }catch(e){
-       	   	
-       	   	
-       	   	   try{//ieµÍ°æ±¾
-       	   	   	
-       	   	   	   return new AcitveXObject("Microsoft.XMLHTTP");
-       	   	   	
-       	   	   }catch(e){
-       	   	   	
-       	   	   	
-       	   	   	    try{//ie¸ß°æ±¾µÄ
-       	   	   	    	
-       	   	   	    	return new ActiveXObject("Msxml2.XMLHTTP");
-       	   	   	    	
-       	   	   	    }catch(e){
-       	   	   	    	//Õâ¸öÇé¿öÒ»°ã²»»á·¢Éú
-       	   	   	    	
-       	   	   	    	alert("¸çÃÇ£¬ÄãÓÃµÄä¯ÀÀÆ÷ÊÇÊ²Ã´¹í£¿Çë»»Ò»¸ö°É");
-       	   	   	    	
-       	   	   	    	throw e;
-       	   	   	    	
-       	   	   	    }
-       	   	   	
-       	   	   	
-       	   	   }
-       	   	
-       	   }
-       	
-       	
-       }
-       
-      //·â×°Ò»¸öajaxµÄ·½·¨
-       
-       //1.ÇëÇó·½Ê½  method  get post
-       //2.ÇëÇóµØÖ·  url
-       //3.ÊÇ·ñÒì²½  ansy   true;
-       //4.²ÎÊı    params
-       //5.·µ»ØÊı¾İÀàĞÍ  type
-       //6.³É¹¦Ö®ºó´¦ÀíµÄ·½·¨  success()
-       
-       //°ÑÕâÁù¸ö²ÎÊı°ó¶¨ÔÚÒ»¸ö¶ÔÏóÉÏ
-      
-       /*
-        * {
-        *  method:"POST",
-        *  url:"TESTServlet",
-        *  ansy:true,
-        *  params:"action",
-        *  type:"xml",
-        *  success:function(){
-        *  
-        *  
-        *  }
-        * 
-        * 
-        * }
-        * 
-        * 
-        */
-       
-       //opt
-       function ajax(opt){
-       	
-       	
-       	//1.µÃµ½¶ÔÏó
-       	
-       	var http=getXMLHttpRequest();
-       	
-       	//2.´ò¿ªÁ¬½Ó
-       	
-       	
-       	//methodÄ¬ÈÏ²»´«µÄ»°£¬ÎÒ¾ÍÊÇgetÇëÇó
-       	
-       	if(!opt.method){
-       		
-       		opt.method="GET";
-       	}
-       	
-       	//ansy Ò»°ã¶¼ÊÇÒì²½
-       	
-       	if(opt.ansy==undefined){
-       		
-       		
-       		opt.ansy=true;
-       	}
-       	
-       	http.open(opt.method,opt.url,opt.ansy);
-       	
-       	//3.·¢ËÍÇëÇó
-       	
-       	//Èç¹ûÊÇpostÇëÇó£¬·¢ËÍÍ·ĞÅÏ¢
-       	
-       	if(opt.method=="POST"){
-       		
-       		
-       		http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-       	}
-       	
-       	http.send(opt.params);
-       	
-       	//4.¼àÌıÇëÇóÏìÓ¦µÄ±ä»¯
-       	
-       	http.onreadystatechange=function(){
-       		
-       		
-       		if(http.readyState==4&& http.status==200){
-       			
-       			
-       			var data;
-       			
-       			//Èç¹ûtypeÀàĞÍ²»´«£¬ÎÒÃÇÄ¬ÈÏ¾ÍÊÇ×Ö·û´®
-       			
-       			if(!opt.type){
-       				
-       				
-       				
-       				data=http.responseText;
-       			
-       			}else if(opt.type=="text"){//´ú±íÆÕÍ¨×Ö·û´®
-       				
-       				data=http.responseText;
-       				
-       			}else if(opt.type=="xml"){
-       				
-       				
-       				
-       				data=http.responseXML;
-       				
-       			}else if(opt.type=="json"){
-       				
-       				var content=http.responseText;
-       				
-       				data=eval("("+content+")");
-       			}
-       			
-       			//½»¸ösuccess·½·¨À´´¦Àí
-       			
-       			opt.success(data);
-       			
-       		}
-       		
-       	}
-       	
-       }
+			} catch (e) {
+				alert("å•Š--æˆ‘ä¸èƒ½è®¤è¯†ä½ è¦æ‰¾çš„æµè§ˆå™¨");
+				throw e;
+			}
+		}
+	}
+}
+
+// ï¿½ï¿½×°ajax
+
+/*
+ * ï¿½ï¿½ï¿½ï¿½ method get/post; ï¿½ï¿½ï¿½ï¿½ï¿½Ö· url ï¿½Ç·ï¿½ï¿½ì²½ ansy true; ï¿½ï¿½ï¿½ï¿½ params ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ type ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½
+ * success ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ */
+function ajax(opt) {
+
+	var http = getXMLHttpRequest();
+
+	if (!opt.method) {
+		opt.method = "GET";
+	}
+
+	if (!opt.ansy) {
+		opt.ansy = true;
+	}
+
+	http.open(opt.method, opt.url, opt.ansy);
+	if (opt.method == "POST") {
+		http.setRequestHeader("Content-type",
+				"application/x-www-form-urlencoded");
+
+	}
+
+	http.send(opt.params);
+	http.onreadystatechange = function() {
+		if (http.readyState == 4 && http.status == 200) {
+			var content;
+			if (!opt.type) {
+				content = http.responseText;
+			} else if (opt.type == "text") {
+				content = http.responseText;
+
+			} else if (opt.type == "XML") {
+				content = http.responseXML;
+			} else if (opt.type == "json") {
+				var t = http.responseText;
+				content = eval("(" + t + ")");
+			   
+			}
+                
+			opt.success(content);
+
+		}
+
+	}
+
+}

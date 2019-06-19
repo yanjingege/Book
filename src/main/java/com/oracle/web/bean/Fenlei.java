@@ -39,4 +39,11 @@ public class Fenlei {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+
+	
+
+	
 }
