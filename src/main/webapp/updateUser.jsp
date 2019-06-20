@@ -1,71 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 1.要使用Bootstrap的话，必须是html5文档 -->
-<meta charset="UTF-8">
-<!-- 2.移动设备优先 -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 3.导入核心的css文件 -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-<!-- 4.需要引入JQuery文件 -->
-<script type="text/javascript" src="bootstrap/js/jquery.js"></script>
-<!-- 5.引入BootStrap的核心JS文件 -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-<title>修改用户信息</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<title></title>
 </head>
 <body background='images/03.jpg'>
-<br>
-<br>
-<p align="center"><font size="7" face="幼圆">修改用户信息</font></p>
-	<form action="UserServlet?action=updateUser" method="post" enctype="multipart/form-data">
-		<input type='hidden' name='id' value="${u.id }" />
-		<table width="500px" height="550px" cellspacing="0"
-			align="center">
-			<br>
-
-	<td colspan=2 valign="top">
-				<table class="table table-striped table-hover table-bordered"   width="500px" height="320px"
-					align="center" cellspacing="0">
-
-			<tr align="center">
-				<td>姓名:</td>
-				<td><input type="text" name="name" value="${u.name}" /></td>
-			</tr>
-			<tr align="center">
-				<td>用户名:</td>
-				<td><input type="text" name="username" value="${u.username}" /></td>
-			</tr>
-
-			<tr align="center">
-				<td><img src="/img${u.touxiang }" style="width:60px;height:50px"/></td>
-				<td><input type="file" name="touxiang" value="file" /></td>
-			</tr>
-
-			<tr align="center">
-				<td>密码:</td>
-				<td><input type="password" name="password"
-					value="${u.password}" /></td>
-			</tr>
-
-			<tr align="center">
-				<td>手机号码:</td>
-				<td><input type="text" name="phone" value="${u.phone}" /></td>
-			</tr>
-
-			<tr align="center">
-				<td>注册时间:</td>
-				<td><input type="date" name="time" value="${u.time}" /></td>
-			</tr>
-
-			<tr height="45px" align="center">
-				<td align="center" colspan="2"><input type="submit"class="btn btn-primary btn-sm"
-					value="修&nbsp改"/> &nbsp; &nbsp; <input type="reset"class="btn btn-success btn-sm" value="清空" /></td>
-			</tr>
+	<div class="container">
+			<h1 align="center">修改用户信息</h1>
+			<hr width="1000px">
 			
-			</table>
-		</table>
-	</form>
+		<form action="http://localhost/book/user" class="form-horizontal" method="post">
+		<!-- 做一个隐藏域 -->
+		<input type="hidden" name="id" value="${u.id }" />
+		<!-- PUT -->
+		<input type="hidden" name="_method" value="PUT" /> 
+		
+			<div class="form-group">
+				<label for="name" class="col-sm-4 control-label">姓名</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="name" name="name"
+						value="${u.name}">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="username" class="col-sm-4 control-label">用户名</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="username"
+						name="username" value="${u.username}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-4 control-label">密码</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="password"
+						name="password" value="${u.password}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-4 control-label">手机号码</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="phone" name="phone"
+						value="${u.phone}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="entryday" class="col-sm-4 control-label">注册时间</label>
+				<div class="col-sm-4">
+					<input type="date" class="form-control" id="time" name="time"
+						value="<fmt:formatDate value="${u.time}" pattern="yyyy-MM-dd" />" >
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-4">
+					<button type="submit" class="btn btn-primary btn-block">修改用户</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

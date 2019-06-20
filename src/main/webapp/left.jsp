@@ -58,7 +58,7 @@
 	<div>
 	  <ul>
 	    <li><a href="addUser.jsp" target="right"><span class="ui-icon ui-icon-plusthick"></span>添加用户</a></li>
-	    <li><a href="UserServlet?action=showUserByPage" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看用户</a></li>	   
+	    <li><a href="users/1" target="right"><span class="ui-icon ui-icon-folder-open"></span>查看用户</a></li>	   
 	  </ul>
 	</div>
 	    

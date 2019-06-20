@@ -6,8 +6,8 @@
 		<result column="fname" jdbcType="VARCHAR" property="fname" />
 	</resultMap>
 
-	<!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"> 
-		delete from fenlei where fid = #{fid,jdbcType=INTEGER} </delete> -->
+	 <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"> 
+		delete from fenlei where fid = #{fid,jdbcType=INTEGER} </delete> 
 
 	<insert id="insert" parameterType="com.oracle.web.bean.Fenlei">
 
@@ -32,14 +32,6 @@
 		#{fid,jdbcType=INTEGER}
 	</select>
 
-	<delete id="deleteByPrimaryKey1" parameterType="java.lang.String">
-		delete from fenlei
-		where fid in
-		<foreach item="arr" collection="array" index="no" open="("
-			separator="," close=")">
-			#{arr}
-		</foreach>
-	</delete>
 	<select id="selectAll" resultMap="BaseResultMap">
 
 		select fid, fname
@@ -80,6 +72,10 @@
 
 		</where>
 		order by fenlei.fid desc
+	</select>
+	
+	<select id="yanzhengAddFenlei2" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM book WHERE f_id = #{fid}
 	</select>
 
 </mapper>

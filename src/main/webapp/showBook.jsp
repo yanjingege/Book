@@ -93,7 +93,7 @@
 			var queren = confirm("您确认要删除这些图书吗");
 			if (queren == true) {
 
-				var $url = "http://localhost/book/delete/" + str
+				var $url = "http://localhost/book/delete1/" + str
 				
 				//alert($url);
 

@@ -71,19 +71,17 @@ $(function(){/* 文档加载，执行一个函数*/
 	
 
 </head>
-<body>
+<body background='images/03.jpg'>
 	<div class="container">
 		<h1 align="center">图书管理系统----分类修改页面</h1>
 
          <hr width="1000px">
 
-<<<<<<< HEAD
-		<form action="http://localhost/book/fenleiupdate"  class="form-horizontal" method="post">
-=======
+
+		
 	<form  id="f2" action="http://localhost/book/fenleiupdate"  class="form-horizontal" method="post">
 	 <!-- PUT -->
         <input type="hidden" name="_method" value="PUT">
->>>>>>> branch 'hotfix' of https://github.com/yanjingege/Book.git
          <!-- 做一个隐藏域，monsterId -->
          <input type="hidden" name="fid" value="${s.fid}">
         

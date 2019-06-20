@@ -29,7 +29,11 @@ public interface FenleiService {
 
 	List<Fenlei> outPutFenleiAll();
 
-	void delete(String[] arr);
+	//void delete(String[] arr);
+
+	int yanzhengAddFenlei2(Integer fid);
+
+	int delete(Fenlei f);
 
 	
 

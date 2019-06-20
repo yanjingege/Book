@@ -108,7 +108,7 @@
 
 				var $url = "http://localhost/book/delete/" + str;
 
-				alert($url);
+				//alert($url);
 
 				//拿到表单
 				$("#deleteForm").attr("action", $url);
@@ -206,7 +206,15 @@
 </script>
 
 </head>
-<body >
+<body background='images/03.jpg'>
+
+<c:if test="${!empty mag }">
+		<script>
+			alert("${mag }");
+		</script>
+	</c:if>
+	<c:remove var="mag" />
+
 
 	<div class="container" >
 		<h1 align="center">图书管理系统----分类列表页</h1>
@@ -236,14 +244,7 @@
 					<td>${ss.index+1 }</td>
 					<td>${s.fid}</td>
 					<td>${s.fname}</td>
-<<<<<<< HEAD
-					<td><a href="http://localhost/book/fenlei_delete/${s.fid}"
-						class="deleteId btn btn-danger">删除</a></td>
-=======
-					<%--  <td><a href="http://localhost/book/fenlei_delete/${s.fid}"
-						class="deleteId btn btn-danger">删除</a></td>   --%>
-
->>>>>>> branch 'hotfix' of https://github.com/yanjingege/Book.git
+	
 					<td><a href="http://localhost/book/fenlei/${s.fid}"
 						class="btn btn-success">修改</a></td>
 				</tr>

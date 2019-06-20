@@ -78,7 +78,7 @@ public class BookHandler {
 	}
 	
 
-	@RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/delete1/{id}",method=RequestMethod.DELETE)
 	public String delete(@PathVariable(value="id") String ids){
 	
 		String[] arr = ids.split(",");

@@ -23,7 +23,11 @@ public interface FenleiMapper {
 
 	List<Fenlei> selectOutPutIds(List<Integer> list);
 
-	void deleteByPrimaryKey1(String[] arr);
+	//void deleteByPrimaryKey1(String[] arr);
+
+	int yanzhengAddFenlei2(Integer fid);
+
+	int deleteByPrimaryKey(Integer fid);
 
 	
 

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 <title>修改图书</title>
 </head>
-<body background="images/03.jpg">	
+<body background='images/03.jpg'>	
 	<div class="container">
 		<form class="form-horizontal" action="http://localhost/book/updatebook" method="post">
 		
