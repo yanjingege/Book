@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%
+	String path = request.getContextPath();
+	String base = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/"
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -89,13 +93,14 @@
 				return;
 
 			}
-
-			var str = "";
+				
+				var str = "";
+				
 
 			for (var i = 0; i < chek.length; i++) {
 
 				if (chek[i].checked == true) {
-
+					
 					str += chek[i].value + ",";
 
 				}
@@ -107,8 +112,6 @@
 				//拿到请求地址
 
 				var $url = "http://localhost/book/delete/" + str;
-
-				alert($url);
 
 				//拿到表单
 				$("#deleteForm").attr("action", $url);
@@ -167,7 +170,7 @@
 
 				} else {//取消
 
-					window.location.href = "http://localhost/book/fenleis1";
+					window.location.href = "http://localhost/book/fenleis/1";
 				}
 			}
 		};
@@ -180,7 +183,7 @@
 
 			} else {//取消
 
-				window.location.href = "http://localhost/book/fenleis1/${pb.pageNow}";
+				window.location.href = "http://localhost/book/fenleis/1";
 			}
 
 		}
@@ -207,6 +210,12 @@
 
 </head>
 <body >
+<c:if test="${!empty mag }">
+		<script>
+			alert("${mag }");
+		</script>
+	</c:if>
+	<c:remove var="mag" />
 
 	<div class="container" >
 		<h1 align="center">图书管理系统----分类列表页</h1>

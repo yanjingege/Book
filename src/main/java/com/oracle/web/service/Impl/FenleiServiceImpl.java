@@ -21,7 +21,7 @@ import com.oracle.web.service.FenleiService;
 
 
 @Service
-public  class FenleiServiceImpl implements FenleiService {
+public   class FenleiServiceImpl implements FenleiService {
 	
 	@Autowired
 	private FenleiMapper fenleiMapper;
@@ -137,15 +137,31 @@ public  class FenleiServiceImpl implements FenleiService {
 		return this.fenleiMapper.selectOutPutIds(list);
 	}
 
-
+	@Override
+	@Transactional
+	public int yanzhengAddFenlei2(Integer fid) {
+		// TODO Auto-generated method stub
+		return this.fenleiMapper.yanzhengAddFenlei2(fid);
+	}
 
 	@Override
 	@Transactional
-	public void delete(String[] arr) {
+	public int delete(Fenlei f) {
 		// TODO Auto-generated method stub
-		this.fenleiMapper.deleteByPrimaryKey1(arr);
+		return this.fenleiMapper.deleteByPrimaryKey(f.getFid());
 	}
 
+
+
+	
+
+	
+	
+
+	
+	
+
+	
 
 	
 
