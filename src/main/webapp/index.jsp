@@ -4,4 +4,5 @@
     <frame src="left.jsp">
 	<frame src="addFenlei.jsp" name="right">
    </frameset>
+   
 </frameset> 

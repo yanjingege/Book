@@ -55,7 +55,21 @@ public class FenleiHandler {
 	}
 
 	
+	/*@RequestMapping(value = "/delete2/{fid}", method = RequestMethod.DELETE)
+	public String delete1(@PathVariable(value = "fid") String ids) {
+
+		
+		  Fenlei f = new Fenlei(); f.setFid(id); fenleiService.delete(f);
+		 
+
+		   String[] arr = ids.split(",");
+			
+			fenleiService.delete1(arr);
+
+			return "redirect:/fenleis/1";
 	
+		}*/
+
 	
 	
 	@RequestMapping(value = "/delete/{fid}", method = RequestMethod.DELETE)

@@ -39,4 +39,6 @@
    <!-- SpringMVC默认不加载本地的js和css：开启对js和css支持 -->
    <mvc:annotation-driven/>
    <mvc:default-servlet-handler/>
+   
+   <mvc:resources location="/images/" mapping="/images/**" />
 </beans>

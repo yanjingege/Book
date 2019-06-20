@@ -208,8 +208,17 @@
 	});   */
 </script>
 
+</style>
 </head>
+<style type="text/css">
+            body 
+            {
+                background-image:url('${pageContext.request.contextPath}/images/03.jpg');
+                
+            }
+        </style>
 <body >
+
 <c:if test="${!empty mag }">
 		<script>
 			alert("${mag }");
@@ -218,6 +227,7 @@
 	<c:remove var="mag" />
 
 	<div class="container" >
+	
 		<h1 align="center">图书管理系统----分类列表页</h1>
 		<hr width="1300px">
 

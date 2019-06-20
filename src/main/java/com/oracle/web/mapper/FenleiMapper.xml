@@ -9,6 +9,15 @@
 	 <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"> 
 		delete from fenlei where fid = #{fid,jdbcType=INTEGER} </delete> 
 
+<!-- <delete id="deleteByPrimaryKey1" parameterType="java.lang.String">
+		delete from fenlei
+		where fid in
+		<foreach item="arr" collection="array" index="no" open="("
+			separator="," close=")">
+			#{arr}
+		</foreach>
+	</delete>  -->
+
 	<insert id="insert" parameterType="com.oracle.web.bean.Fenlei">
 
 		insert into fenlei (fid,

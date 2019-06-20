@@ -35,7 +35,7 @@ public interface FenleiService {
 
 	int delete(Fenlei f);
 
-	
+	/*void delete1(String[] arr);*/
 
 	
 
